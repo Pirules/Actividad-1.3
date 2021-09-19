@@ -19,6 +19,13 @@ class datos {
     datos();
     datos(string linea);
     void imprimir();
+    int getDate();
+    //sobrecargas de operadores
+    bool operator ==(const datos&);
+    bool operator !=(const datos&);
+    bool operator >(const datos&);
+    bool operator <(const datos&);
+    bool operator <=(const datos&);
 };
 
 #endif

@@ -20,8 +20,9 @@ datos::datos(string linea){
     this->horas = stoi(linea.substr(6,linea.find(":")));
     this->minutos = stoi(linea.substr(10,linea.find(":")));
     this->segundos = stoi(linea.substr(13,linea.find(":")));
-    this->ip = linea.substr(16,17);
+    this->ip = linea.substr(16,linea.find("."));
     this->razon = linea.substr(34);
+    
     //Guardamos tiempos en dataStruct
     dateStruct.tm_sec = segundos;
     dateStruct.tm_min = minutos;
@@ -32,7 +33,7 @@ datos::datos(string linea){
          dateStruct.tm_mon = i;
     }
     dateStruct.tm_year = 2021 - 1900;
-    date = mktime(&dateStruct);
+    this->date = mktime(&dateStruct);
 }
 
 void datos::imprimir(){
@@ -41,7 +42,31 @@ void datos::imprimir(){
     cout<<horas<<":";
     cout<<minutos<<":";
     cout<<segundos<<" ";
-    cout<<ip<<" ";
+    cout<<ip;
     cout<<razon<<" ";
     cout<<date<<" ";
+}
+
+int datos::getDate(){
+    return this->date;
+}
+
+bool datos::operator==(const datos &other) {
+  return this->date == other.date;
+}
+
+bool datos::operator!=(const datos &other) {
+  return this->date != other.date;
+}
+
+bool datos::operator>(const datos &other) {
+  return this->date > other.date;
+}
+
+bool datos::operator<(const datos &other) {
+  return this->date < other.date;
+}
+
+bool datos::operator<=(const datos &other) {
+  return this->date <= other.date;
 }

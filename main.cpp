@@ -76,18 +76,18 @@ time_t getFecha(string fecha){
 }
  
 //funcion de busqueda binaria recursiva.
-int binarySearch(vector<datos>& lista, int left, int right, datos key){
+int binarySearch(vector<datos>& lista, int left, int right, time_t key){
   int m;
   if (left > right){
     return -1;
   }
   m = left + (right-1)/2;
-  if (key == lista[m]){
+  if (lista[m] == key){
     return m;
-  } else if(key < lista[m]){
-    return binarySearch(lista, left, m-1, key);
-  } else {
+  } else if(lista[m] > key){
     return binarySearch(lista, m+1, right, key);
+  } else {
+    return binarySearch(lista, left, m-1, key);
   }
 
 }
@@ -97,7 +97,7 @@ int main(){
     string input, fecha, mes;
     ifstream archivoIn("bitacora.txt");
     int dia, horas, minutos, segundos;
-    time_t date;
+    time_t dateI, dateF;
     while(getline(archivoIn,input)){
       info.push_back(datos(input));
     }
@@ -113,15 +113,21 @@ int main(){
     //pedimos al usuario fechas para delimitar la busqueda
     cout<<"Introduce la fecha inicial de la busqueda con el formato de la bitacora:"<<endl;
     getline(cin,fecha); 
-    date = getFecha(fecha);
+    dateI = getFecha(fecha);
 
     cout<<"Introduce la fecha limite de la busqueda con el formato de la bitacora:"<<endl;
     getline(cin,fecha); 
-    date = getFecha(fecha);
+    dateF = getFecha(fecha);
 
     //obtenemos la posicion de inicio y de fin de los datos a depsplegar con busqueda binaria
     int posInicial, posFinal;
-    posInicial = binarySearch(info, 0, info.size()-1, date);
+    posInicial = binarySearch(info, 0, info.size()-1, dateI);
+    posFinal = binarySearch(info, 0, info.size()-1, dateF);
 
+    for (int i=posInicial; i<posFinal;i++){
+      info[i].imprimir();
+      cout<<endl;
+    } 
+    
     return 0;
 }

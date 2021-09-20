@@ -7,7 +7,6 @@
 using namespace std;
 
 //Algoritmo de ordenamiento por fusion(Merge) Division & Fusion.
-
 void merge(vector<datos> &lista, int low, int m, int high){
   vector<datos> temp;
   
@@ -75,24 +74,7 @@ time_t getFecha(string fecha){
 
 }
  
-//funcion de busqueda binaria recursiva.
-/*int binarySearch(vector<datos>& lista, int left, int right, time_t key){
-  int m;
-  if (left > right){
-    return -1;
-  }
-  m = left + (right-1)/2;
-  if (lista[m] == key){
-    return m;
-  } else if(lista[m] > key){
-    return binarySearch(lista, m+1, right, key);
-  } else {
-    return binarySearch(lista, left, m-1, key);
-  }
-
-}
-*/
-
+//funcion de busqueda binaria iterativa.
 int binarySearch(vector<datos>& lista, int n, time_t k) {
   int low = 0;
   int high = n - 1;
@@ -111,7 +93,7 @@ int main(){
     vector<datos> info;
     string input, fecha, mes;
     ifstream archivoIn("bitacora.txt");
-    int dia, horas, minutos, segundos;
+    int dia, horas, minutos, segundos, posInicial, posFinal;
     time_t dateI, dateF;
     while(getline(archivoIn,input)){
       info.push_back(datos(input));
@@ -119,10 +101,6 @@ int main(){
     archivoIn.close();
     ordenaMerge(info,0,info.size()-1);
 
-    /*for (int i=0; i<info.size();i++){
-      info[i].imprimir();
-      cout<<"NUMERO DE LISTA>"<<i<<endl;
-    } */
     
     //pedimos al usuario fechas para delimitar la busqueda
     cout<<"Introduce la fecha inicial de la busqueda con el formato de la bitacora:"<<endl;
@@ -135,14 +113,15 @@ int main(){
     cout<<endl;
 
     //obtenemos la posicion de inicio y de fin de los datos a depsplegar con busqueda binaria
-    int posInicial, posFinal;
     posInicial = binarySearch(info, info.size(), dateI);
     posFinal = binarySearch(info, info.size(), dateF);
 
-    for (int i=posInicial; i<posFinal+1;i++){
+    cout<<posInicial<<endl;
+    cout<<posFinal<<endl;
+
+    for (int i=posInicial; i<=posFinal;i++){
       info[i].imprimir();
       cout<<endl;
     } 
-
     return 0;
 }

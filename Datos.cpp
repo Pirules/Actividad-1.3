@@ -44,7 +44,6 @@ void datos::imprimir(){
     cout<<segundos<<" ";
     cout<<ip;
     cout<<razon<<" ";
-    cout<<date<<" ";
 }
 
 int datos::getDate(){
@@ -53,6 +52,10 @@ int datos::getDate(){
 
 bool datos::operator==(const datos &other) {
   return this->date == other.date;
+}
+
+bool datos::operator==(const time_t &other) {
+  return this->date == other;
 }
 
 bool datos::operator!=(const datos &other) {
@@ -65,6 +68,10 @@ bool datos::operator>(const datos &other) {
 
 bool datos::operator<(const datos &other) {
   return this->date < other.date;
+}
+
+bool datos::operator>(const time_t &other) {
+  return this->date > other;
 }
 
 bool datos::operator<=(const datos &other) {

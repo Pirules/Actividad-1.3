@@ -22,9 +22,11 @@ class datos {
     int getDate();
     //sobrecargas de operadores
     bool operator ==(const datos&);
+    bool operator ==(const time_t&);
     bool operator !=(const datos&);
     bool operator >(const datos&);
     bool operator <(const datos&);
+    bool operator >(const time_t&);
     bool operator <=(const datos&);
 };
 

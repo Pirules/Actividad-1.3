@@ -76,7 +76,7 @@ time_t getFecha(string fecha){
 }
  
 //funcion de busqueda binaria recursiva.
-int binarySearch(vector<datos>& lista, int left, int right, time_t key){
+/*int binarySearch(vector<datos>& lista, int left, int right, time_t key){
   int m;
   if (left > right){
     return -1;
@@ -91,6 +91,21 @@ int binarySearch(vector<datos>& lista, int left, int right, time_t key){
   }
 
 }
+*/
+
+int binarySearch(vector<datos>& lista, int n, time_t k) {
+  int low = 0;
+  int high = n - 1;
+  while (low <= high) {
+    int m = low + (high - low) / 2;
+    if (lista[m] == k) return m;
+    else if (lista[m] > k) 
+      high = m - 1;
+    else 
+      low = m + 1;
+  }
+  return -1;
+}
 
 int main(){
     vector<datos> info;
@@ -102,12 +117,11 @@ int main(){
       info.push_back(datos(input));
     }
     archivoIn.close();
-    info[0].imprimir();
     ordenaMerge(info,0,info.size()-1);
 
     /*for (int i=0; i<info.size();i++){
       info[i].imprimir();
-      cout<<endl;
+      cout<<"NUMERO DE LISTA>"<<i<<endl;
     } */
     
     //pedimos al usuario fechas para delimitar la busqueda
@@ -118,16 +132,17 @@ int main(){
     cout<<"Introduce la fecha limite de la busqueda con el formato de la bitacora:"<<endl;
     getline(cin,fecha); 
     dateF = getFecha(fecha);
+    cout<<endl;
 
     //obtenemos la posicion de inicio y de fin de los datos a depsplegar con busqueda binaria
     int posInicial, posFinal;
-    posInicial = binarySearch(info, 0, info.size()-1, dateI);
-    posFinal = binarySearch(info, 0, info.size()-1, dateF);
+    posInicial = binarySearch(info, info.size(), dateI);
+    posFinal = binarySearch(info, info.size(), dateF);
 
-    for (int i=posInicial; i<posFinal;i++){
+    for (int i=posInicial; i<posFinal+1;i++){
       info[i].imprimir();
       cout<<endl;
     } 
-    
+
     return 0;
 }

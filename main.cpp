@@ -116,8 +116,6 @@ int main(){
     posInicial = binarySearch(info, info.size(), dateI);
     posFinal = binarySearch(info, info.size(), dateF);
 
-    cout<<posInicial<<endl;
-    cout<<posFinal<<endl;
 
     for (int i=posInicial; i<=posFinal;i++){
       info[i].imprimir();

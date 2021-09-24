@@ -1,0 +1,2 @@
+language = "cpp"
+run = "g++ -std=c++17 -o papaya main.cpp"

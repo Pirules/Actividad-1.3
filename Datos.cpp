@@ -11,7 +11,7 @@ datos::datos(){
     this->ip="111.11.1.11:111";
     this->razon="Esta es la razon";
 }
-
+//todo: cambia todo a strings pon stois en el datastruct
 datos::datos(string linea){
     /*Utilizamos substr para subdividir la linea que recibimos del archivo
        y asi guardar nuestaras variables.*/ 
@@ -35,8 +35,8 @@ datos::datos(string linea){
     dateStruct.tm_year = 2021 - 1900;
     this->date = mktime(&dateStruct);
 }
-
-void datos::imprimir(){
+//funcion para imprimir y guardar en archivo
+void datos::imprimir(ofstream &o){
     cout<<mes<<" ";
     cout<<dia<<" ";
     cout<<horas<<":";
@@ -44,6 +44,13 @@ void datos::imprimir(){
     cout<<segundos<<" ";
     cout<<ip;
     cout<<razon<<" ";
+    o<<mes<<" ";
+    o<<dia<<" ";
+    o<<horas<<":";
+    o<<minutos<<":";
+    o<<segundos<<" ";
+    o<<ip;
+    o<<razon<<" "<<endl;
 }
 
 int datos::getDate(){

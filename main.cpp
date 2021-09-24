@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include <string>
 #include "Datos.cpp"
@@ -116,10 +115,12 @@ int main(){
     posInicial = binarySearch(info, info.size(), dateI);
     posFinal = binarySearch(info, info.size(), dateF);
 
-
+    ofstream o ("bitacora_ordenada.txt");
     for (int i=posInicial; i<=posFinal;i++){
-      info[i].imprimir();
+      info[i].imprimir(o);
       cout<<endl;
     } 
+    o.close();
+
     return 0;
 }

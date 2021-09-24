@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <ctime>
+#include <fstream>
 using namespace std;
 
 class datos {
@@ -18,7 +19,7 @@ class datos {
     public: 
     datos();
     datos(string linea);
-    void imprimir();
+    void imprimir(ofstream &o);
     int getDate();
     //sobrecargas de operadores
     bool operator ==(const datos&);
